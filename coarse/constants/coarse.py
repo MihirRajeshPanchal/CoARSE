@@ -8,6 +8,6 @@ S2_API_KEY = os.getenv("S2_API_KEY")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 llm = ChatGroq(
-    model="llama-3.1-8b-instant",
+    model="meta-llama/llama-4-scout-17b-16e-instruct",
     temperature=0
 )

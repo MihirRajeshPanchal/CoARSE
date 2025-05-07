@@ -1,4 +1,5 @@
 from enum import Enum
+from pydantic import BaseModel
 
 class SectionLabel(str, Enum):
     ABS = "Abstract"
@@ -15,3 +16,7 @@ class SectionLabel(str, Enum):
     OAL = "Overall"
     BIB = "Bibliography"
     EXT = "External"
+    
+class Section(BaseModel):
+    label: SectionLabel
+    content: str

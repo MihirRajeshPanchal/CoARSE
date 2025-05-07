@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from coarse.api import healthcheck
+from coarse.api import healthcheck, pdfparse
 
 app = FastAPI()
 
@@ -13,6 +13,7 @@ app.add_middleware(
 )
 
 app.include_router(healthcheck.router)
+app.include_router(pdfparse.router)
 
 @app.get("/")
 def root():
