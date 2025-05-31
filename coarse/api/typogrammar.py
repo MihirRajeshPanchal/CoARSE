@@ -8,6 +8,11 @@ router = APIRouter()
 
 @router.post("/typogrammar")
 async def typo_grammar(paper_obj: PaperObj):
+    """
+    Handles POST requests to check a paper for typos and grammar issues.
+    
+    Accepts a PaperObj payload, performs typo and grammar checking, and returns the result. Raises an HTTP 500 error if processing fails.
+    """
     try:
         result = await check_typo_grammar(paper_obj)
         return result
