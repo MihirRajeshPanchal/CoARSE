@@ -6,6 +6,7 @@ from coarse.constants.pdfparse import PDF_PARSER_PROMPT
 from coarse.constants.coarse import llm
 from coarse.models.sections import Section
 from coarse.utils.pdfparse import extract_paper_content, save_to_file
+from coarse.models.sections_map import SectionMap
 
 async def extract_sections_from_paper(file: UploadFile):
     temp_file_path = f"temp_{file.filename}"
@@ -16,7 +17,7 @@ async def extract_sections_from_paper(file: UploadFile):
     text = extract_paper_content(temp_file_path)
     save_to_file(temp_file_path + ".txt", text)
     
-    chain = PDF_PARSER_PROMPT | llm | OutputFixingParser.from_llm(parser=JsonOutputParser(pydantic_object=Section), llm=llm)
+    chain = PDF_PARSER_PROMPT | llm | OutputFixingParser.from_llm(parser=JsonOutputParser(pydantic_object=SectionMap), llm=llm)
     
     result = chain.invoke({"text": text})
     

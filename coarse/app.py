@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from coarse.api import healthcheck, pdfparse, typogrammar
+from coarse.api import healthcheck, pdfparse, typogrammar, aspect_purpose
+import uvicorn
 
 app = FastAPI()
 
@@ -15,7 +16,12 @@ app.add_middleware(
 app.include_router(healthcheck.router)
 app.include_router(pdfparse.router)
 app.include_router(typogrammar.router)
+app.include_router(aspect_purpose.router)
 
 @app.get("/")
 def root():
     return {"message": "Welcome to ArgumentPeer API!"}
+
+
+if __name__ == "__main__":
+    uvicorn.run("coarse.app:app", host="127.0.0.1", port=8000, reload=True)
