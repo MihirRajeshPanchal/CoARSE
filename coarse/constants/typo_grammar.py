@@ -2,12 +2,12 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain.text_splitter import CharacterTextSplitter
 
 TYPO_GRAMMAR_PROMPT = ChatPromptTemplate.from_template("""
-You are an AI specialized in typos and grammatical mistakes in scientific paper.
+You are an AI specialized in detecting typos and grammatical mistakes in scientific paper.
 
 You'll be given a JSON object with key value pairs.
                                                        
 Keys are sections code, showing various sections.
-The possible sections code are:
+The possible section codes and their meanings are:
 ABS = "Abstract"
 INT = "Introduction"
 RWK = "Related Works"
@@ -52,15 +52,15 @@ Every error should be represented in a form of dictionary with two key value pai
 Provide your output as a JSON object with error codes as keys and an array of dictionaries of error as values. Format:
 ```json
 {{
-  "TYP": [
+    "TYP": [
         {{
             "INC": "incorrect text from the section",
             "SEC": "section code of the paper where error occured",
             "CRT": "corrected text to replace the incorrected text"                                          
         }},
         ...                                              
-    ]
-  "GMR": [
+    ],
+    "GMR": [
         {{
             "INC": "incorrect text from the section",
             "SEC": "section code of the paper where error occured",
