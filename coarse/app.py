@@ -20,6 +20,12 @@ app.include_router(aspect_purpose.router)
 
 @app.get("/")
 def root():
+    """
+    Handles the root endpoint and returns a welcome message for the ArgumentPeer API.
+    
+    Returns:
+        A JSON object containing a welcome message.
+    """
     return {"message": "Welcome to ArgumentPeer API!"}
 
 

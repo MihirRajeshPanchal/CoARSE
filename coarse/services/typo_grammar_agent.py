@@ -33,11 +33,9 @@ def convert_section_codes(result_dict):
 
 # Final async function
 async def check_typo_grammar(paper_obj):
-    chain = TYPO_GRAMMAR_PROMPT | llm | OutputFixingParser.from_llm(
-        parser=JsonOutputParser(pydantic_object=Errors),
-        llm=llm
-    )
-
-    raw_result = chain.invoke({"paper_obj": paper_obj})
-    final_result = convert_section_codes(raw_result)
-    return Errors(**final_result)
+    chain = TYPO_GRAMMAR_PROMPT | llm | OutputFixingParser.from_llm(parser=JsonOutputParser(pydantic_object=Errors), llm=llm)
+    
+    errors = await chain.invoke({"paper_obj": paper_obj})
+    
+    print(errors)
+    return errors
